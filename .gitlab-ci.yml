@@ -1,0 +1,86 @@
+stages:
+  - build
+
+build-frontend-nodejs:
+  variables:
+    REPO_NAME: frontend-nodejs
+  stage: build
+  when: manual
+  tags:
+    - shared_dev_runner
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
+  script:
+    - mkdir -p /kaniko/.docker
+    - echo $KEY_DOCKERHUB > /kaniko/.docker/config.json
+    - /kaniko/executor
+      --compressed-caching=false
+      --single-snapshot
+      --snapshotMode=redo
+      --context "${CI_PROJECT_DIR}/${REPO_NAME}"
+      --dockerfile "${CI_PROJECT_DIR}/${REPO_NAME}/Dockerfile"
+      --destination "dockerhub.test.co.kr/${REPO_NAME}"
+
+build-backend-data_journalism:
+  variables:
+    REPO_NAME: backend-data_journalism
+  stage: build
+  when: manual
+  tags:
+    - shared_dev_runner
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
+  script:
+    - mkdir -p /kaniko/.docker
+    - echo $KEY_DOCKERHUB > /kaniko/.docker/config.json
+    - /kaniko/executor
+      --compressed-caching=false
+      --single-snapshot
+      --snapshotMode=redo
+      --context "${CI_PROJECT_DIR}/${REPO_NAME}"
+      --dockerfile "${CI_PROJECT_DIR}/${REPO_NAME}/Dockerfile"
+      --destination "dockerhub.test.co.kr/${REPO_NAME}"
+
+build-backend-java17:
+  variables:
+    REPO_NAME: backend-java17
+  stage: build
+  when: manual
+  tags:
+    - shared_dev_runner
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
+  script:
+    - mkdir -p /kaniko/.docker
+    - echo $KEY_DOCKERHUB > /kaniko/.docker/config.json
+    - /kaniko/executor
+      --compressed-caching=false
+      --single-snapshot
+      --snapshotMode=redo
+      --context "${CI_PROJECT_DIR}/${REPO_NAME}"
+      --dockerfile "${CI_PROJECT_DIR}/${REPO_NAME}/Dockerfile"
+      --destination "dockerhub.test.co.kr/${REPO_NAME}"
+
+build-util-gitlab_to_telegram:
+  variables:
+    REPO_NAME: util-gitlab_to_telegram
+  stage: build
+  when: manual
+  tags:
+    - shared_dev_runner
+  image:
+    name: gcr.io/kaniko-project/executor:debug
+    entrypoint: [""]
+  script:
+    - mkdir -p /kaniko/.docker
+    - echo $KEY_DOCKERHUB > /kaniko/.docker/config.json
+    - /kaniko/executor
+      --compressed-caching=false
+      --single-snapshot
+      --snapshotMode=redo
+      --context "${CI_PROJECT_DIR}/${REPO_NAME}"
+      --dockerfile "${CI_PROJECT_DIR}/${REPO_NAME}/Dockerfile"
+      --destination "dockerhub.test.co.kr/${REPO_NAME}"
